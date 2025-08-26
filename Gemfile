@@ -7,9 +7,9 @@ gem 'sqlite3', '~> 1.6.0'
 # Use Puma as the app server
 gem 'puma', '~> 6.0'
 # Use webrick for development server
+gem 'pry'
+gem 'rubocop', require: false
 gem 'webrick', '~> 1.8'
-# Add ostruct gem to silence Ruby 3.5+ warnings
-gem 'ostruct'
 # Use bootsnap for faster boot times
 gem 'bootsnap', require: false
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -20,12 +20,10 @@ gem 'sdoc', '~> 2.4', group: :doc
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-group :development, :test do
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'rspec-rails', '~> 6.1'
-  gem 'capybara', '~> 3.38'
-  gem 'database_cleaner-active_record', '~> 2.1'
-end
+gem 'byebug', platforms: %i[mri windows]
+gem 'capybara', '~> 3.38'
+gem 'database_cleaner-active_record', '~> 2.1'
+gem 'rspec-rails', '~> 6.1'
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views

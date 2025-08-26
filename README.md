@@ -44,7 +44,7 @@ patch 'articles/:id', to: 'articles#update'
 `PUT` is meant to be used when replacing a whole resource. `PATCH`, on the other
 hand, is for used for sending a set of changes to a resource.
 
-If you run `rake routes`, you will see we have some new routes:
+If you run `bin/rails routes`, you will see we have some new routes:
 
 ```txt
 Prefix      Verb  URI Pattern               Controller#Action
@@ -78,7 +78,7 @@ end
 Let's just copy and paste the `new` form:
 
 ```erb
-<%= form_tag articles_path do %>
+<%= form_with url: articles_path, local: true do %>
   <label>Article title:</label><br>
   <%= text_field_tag :title %><br>
 
@@ -104,13 +104,13 @@ end
 Now that the `edit` view template will have access to the `Article` object (stored
 in `@article`), we need to refactor the form so that it auto-fills the form fields
 with the corresponding data from `@article`. We'll also use a different form helper,
-`form_for`, which will automatically set up the url where the form will be sent.
+`form_with`, which will automatically set up the url where the form will be sent.
 These changes can be seen below:
 
 ```erb
 <% # app/views/articles/edit.html.erb %>
 
-<%= form_for @article do |f| %>
+<%= form_with model: @article, local: true do |f| %>
   <%= f.label 'Article Title' %><br>
   <%= f.text_field :title %><br>
 
@@ -121,9 +121,9 @@ These changes can be seen below:
 <% end %>
 ```
 
-In this case, `form_for` takes care of some work for us. Using the object
-`@article` we've provided, `form_for` determines that `@article` is **not a _new_
-instance** of the `Article` class. Because of this, `form_for` knows to
+In this case, `form_with` takes care of some work for us. Using the object
+`@article` we've provided, `form_with` determines that `@article` is **not a _new_
+instance** of the `Article` class. Because of this, `form_with` knows to
 automatically send to the _update_ path.
 
 Since `@article` is not a new instance of `Article`, the inputs on this form, the text
